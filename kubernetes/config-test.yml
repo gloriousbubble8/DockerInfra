@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: config-test
+
+spec:
+  containers:
+    - name: config-test
+      image: curlimages/curl
+      command: ["sleep", "3600"]
+      envFrom:
+        - configMapRef: #Take all key/value pairs from the app-config ConfigMap and expose them as environment variables in this container.
+            name: app-config
