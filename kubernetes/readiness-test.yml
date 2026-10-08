@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: readiness-test
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: readiness-test
+
+  # From here Pod specification is defined
+  template:
+    metadata:
+      labels:
+        app: readiness-test
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.30.5
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5 # Fire readiness api call 5 seconds after container start
+            periodSeconds: 5 # Check readiness for every 5 seconds
