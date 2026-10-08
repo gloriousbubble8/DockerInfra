@@ -16,6 +16,13 @@ spec:
       containers:
         - name: slow-server
           image: python:3.13-alpine
+          startupProbe:
+            httpGet:
+              path: /
+              port: 8080
+            periodSeconds: 5
+            timeoutSeconds: 5
+            failureThreshold: 10
           livenessProbe:
             httpGet:
               path: /
