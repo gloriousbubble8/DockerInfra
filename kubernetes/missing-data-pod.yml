@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: missing-data-pod
+spec:
+  containers:
+    - name: missing-data-container
+      image: busybox:1.37
+      command: ["sh", "-c", "sleep 3600"]
+      volumeMounts:
+        - name: persistent-data
+          mountPath: /data
+  volumes:
+    - name: persistent-data
+      persistentVolumeClaim:
+        claimName: missing-data-claim

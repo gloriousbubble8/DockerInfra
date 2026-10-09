@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: retain-recovery-claim
+
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: hostpath-retain
+  volumeName: pvc-2eeee5e6-22f0-4fb5-85d1-95a6e41fa072
+  resources:
+    requests:
+      storage: 1Gi
