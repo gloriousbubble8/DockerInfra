@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: limitrange-default-test
+  namespace: quota-lab
+spec:
+  containers:
+    - name: nginx
+      image: nginx:1.27

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cpu-throttling-test
+spec:
+  containers:
+    - name: busybox
+      image: busybox:1.36
+      command: ["sh", "-c", "while true; do :; done"]
+      resources:
+        requests:
+          cpu: "100m"
+          memory: "16Mi"
+        limits:
+          cpu: "500m"
+          memory: "32Mi"

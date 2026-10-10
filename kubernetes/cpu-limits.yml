@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: container-resource-limits
+  namespace: quota-lab
+spec:
+  limits:
+    - type: Container
+      min:
+        cpu: "100m"
+      max:
+        cpu: "1"
+      defaultRequest: # Default cpu requests per container if not configured
+        cpu: "200m"
+      default:
+        cpu: "500m" # Default cpu limit per container if not configured

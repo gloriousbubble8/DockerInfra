@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: cpu-quota
+  namespace: quota-lab
+spec:
+  hard:
+    requests.cpu: "2" #Important: This quota limits the sum of CPU requests, not actual CPU usage and not the sum of CPU limits.
