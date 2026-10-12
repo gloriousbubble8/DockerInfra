@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: oom-test
+spec:
+  restartPolicy: Always
+  containers:
+    - name: memory-eater
+      image: python:3.12-alpine
+      resources:
+        requests:
+          memory: "16Mi"
+        limits:
+          memory: "32Mi"
+      command:
+        - python
+        - -c
+        - |
+          data = bytearray(64*1024*1024)
+          import time
+          time.sleep(60)
+
+# Container memory limit exceeded: the container may be OOM-killed.
+# Node memory pressure: the kubelet may evict a Pod to protect node stability.
+# Deployment-managed Pod evicted: the Deployment's ReplicaSet normally creates a replacement, but that replacement may remain Pending if resources are still insufficient.
