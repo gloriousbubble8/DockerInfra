@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sa-pod-override-test
+spec:
+  serviceAccountName: no-automount-sa
+  automountServiceAccountToken: true
+  containers:
+    - name: test
+      image: busybox:1.36
+      command: ["sh", "-c", "sleep 3600"]
