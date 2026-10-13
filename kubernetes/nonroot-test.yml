@@ -15,6 +15,9 @@ spec:
       securityContext:
         allowPrivilegeEscalation: false # This prop is container level not pod level
         readOnlyRootFilesystem: true
+        capabilities:
+          drop:
+            - ALL # tells the container runtime to drop all Linux capabilities for this container.
       volumeMounts:
         - name: temp-storage
           mountPath: /tmp
