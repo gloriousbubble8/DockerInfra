@@ -14,4 +14,19 @@ RUN apt-get update \
     && apt-get install -y docker-ce-cli \
     && rm -rf /var/lib/apt/lists/*
 
+
+
+# Install kubectl with retries
+RUN set -eux; \
+    ARCH="$(dpkg --print-architecture)"; \
+    K8S_VERSION="$(curl --retry 5 --retry-all-errors \
+      --retry-delay 2 -fsSL https://dl.k8s.io/release/stable.txt)"; \
+    curl --retry 5 --retry-all-errors --retry-delay 2 \
+      -fL --connect-timeout 20 \
+      -o /usr/local/bin/kubectl \
+      "https://dl.k8s.io/release/${K8S_VERSION}/bin/linux/${ARCH}/kubectl"; \
+    chmod 0755 /usr/local/bin/kubectl
+
+
+
 USER jenkins
